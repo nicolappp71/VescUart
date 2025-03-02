@@ -6,6 +6,10 @@
 #include "buffer.h"
 #include "crc.h"
 
+// Constants
+#define MCCONF_SIGNATURE		1065524471
+#define APPCONF_SIGNATURE		2099347128
+
 class VescUart
 {
 
@@ -181,6 +185,8 @@ class VescUart
          */
         void printVescValues(void);
 
+        void sendFakeMcConf(void);
+        void fillMcConfiguration(mc_configuration& config);
 	private: 
 
 		/** Variabel to hold the reference to the Serial object to use for UART */
@@ -233,6 +239,7 @@ class VescUart
 		 */
 		void serialPrint(uint8_t * data, int len);
 
+    int32_t confgenerator_serialize_mcconf(uint8_t *buffer, const mc_configuration *conf);
 };
 
 #endif
